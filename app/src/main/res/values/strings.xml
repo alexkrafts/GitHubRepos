@@ -1,11 +1,11 @@
 <resources>
-    <string name="app_name">GitHub Repos</string>
+    <string name="app_name">GitHub repositories</string>
     <string name="base_url" translatable="false">https://api.github.com/</string>
     <string name="forks_number">Forks: %d</string>
-    <string name="search">Search repository</string>
+    <string name="search">Find a repository…</string>
     <string name="loading">Loading..</string>
     <string name="noData">No result for your search</string>
     <string name="error_no_internet">No internet connection</string>
     <string name="generic_error">Something went wrong.\nPlease try again later</string>
-    <string name="enterQuery">Type repository name above</string>
+    <string name="enterQuery">Enter repository name above</string>
 </resources>

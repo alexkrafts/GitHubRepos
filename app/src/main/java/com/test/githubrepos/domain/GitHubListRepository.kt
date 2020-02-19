@@ -11,7 +11,7 @@ class GitHubListRepository(
     private val api: GitHubApi
 ) {
 
-    val listState = MutableLiveData<RepositoriesListState>()
+    val listState = MutableLiveData<RepositoriesListState>(EmptyQuery)
 
     suspend fun searchRepositoriesWithPagination(
         query: String,

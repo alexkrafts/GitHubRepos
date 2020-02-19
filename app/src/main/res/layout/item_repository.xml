@@ -31,14 +31,15 @@
 
         <TextView
             android:id="@+id/description"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/repository_item_padding"
             android:maxLines="2"
             android:text="@{repo.description}"
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-            app:layout_constraintLeft_toRightOf="@id/avatar"
+            app:layout_constraintStart_toEndOf="@id/avatar"
             app:layout_constraintTop_toBottomOf="@id/name"
+            app:layout_constraintEnd_toEndOf="parent"
             tools:text="Each item should contain The avatar image of the ownerThe repository name The descriptionThe number of forks"
             />
 
@@ -62,8 +63,8 @@
             android:maxLines="1"
             android:text="@{repo.name}"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            app:layout_constraintLeft_toRightOf="@id/avatar"
-            app:layout_constraintRight_toLeftOf="@id/forks"
+            app:layout_constraintStart_toEndOf="@id/avatar"
+            app:layout_constraintEnd_toStartOf="@id/forks"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Some repo name, quite long one"
             />
