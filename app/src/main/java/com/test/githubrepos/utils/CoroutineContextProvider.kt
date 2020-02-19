@@ -20,5 +20,6 @@ class CoroutineContextProviderTest : CoroutineContextProvider {
 }
 
 fun Throwable.logError() {
-    Log.e("---Github app log", "Error", this )
+    Log.e("---Github app log", "Error", this)
 }
+
