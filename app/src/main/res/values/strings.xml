@@ -2,4 +2,6 @@
     <string name="app_name">GitHub Repos</string>
     <string name="base_url" translatable="false">https://api.github.com/</string>
     <string name="forks_number">Forks: %d</string>
+    <string name="search">Search repository</string>
+    <string name="loading">Loading..</string>
 </resources>

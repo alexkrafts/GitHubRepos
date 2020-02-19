@@ -17,16 +17,17 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main).apply {
-            vm = vm
-            lifecycleOwner = this@MainActivity
-        }
+        val binding = DataBindingUtil.setContentView<ActivityMainBinding>(
+            this,
+            R.layout.activity_main
+        )
+        binding.vm = vm
+        binding.lifecycleOwner = this@MainActivity
 
         val adapter = RepositoriesAdapter()
         reposList.adapter = adapter
-        vm.fetchData()
 
-        vm.getPagedList().observe(this, Observer {
+        vm.pagedList.observe(this, Observer {
             adapter.submitList(it)
         })
 

@@ -19,11 +19,24 @@
         tools:context=".ui.MainActivity"
         >
 
+        <EditText
+            android:id="@+id/search"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="0dp"
+            android:hint="@string/search"
+            android:text="@={vm.query}"
+            android:drawableStart="@drawable/ic_search_black_24dp"
+            android:imeOptions="actionSearch"
+            android:layout_height="wrap_content"/>
+
         <TextView
             android:id="@+id/placeholder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Loading.."
+            android:text="@string/loading"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -38,7 +51,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/search"
             tools:listitem="@layout/item_repository"
             />
 
