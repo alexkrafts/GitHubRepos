@@ -1,8 +1,8 @@
 package com.test.githubrepos
 
 import android.app.Application
-import com.test.githubrepos.R
-import com.test.githubrepos.model.GitHubRepository
+import com.test.githubrepos.com.test.githubrepos.domain.GitHubListRepository
+import com.test.githubrepos.model.GitHubApi
 import com.test.githubrepos.ui.MainViewModel
 import com.test.githubrepos.utils.CoroutineContextProvider
 import com.test.githubrepos.utils.CoroutineContextProviderLive
@@ -31,11 +31,12 @@ class GitHubApp : Application() {
                 .build()
         }
 
-        single { GitHubRepository(get()) }
+        factory { get<Retrofit>().create(GitHubApi::class.java) }
+
+        single { GitHubListRepository(get()) }
 
         single<CoroutineContextProvider> { CoroutineContextProviderLive() }
 
         viewModel { MainViewModel(get(), get()) }
     }
-
 }
