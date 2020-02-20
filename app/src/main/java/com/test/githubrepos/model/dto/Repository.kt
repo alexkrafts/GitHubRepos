@@ -1,7 +1,6 @@
 package com.test.githubrepos.com.test.githubrepos.model.dto
 
 import com.google.gson.annotations.SerializedName
-import com.test.githubrepos.com.test.githubrepos.model.dto.Owner
 
 data class Repository(
     val id: Int,

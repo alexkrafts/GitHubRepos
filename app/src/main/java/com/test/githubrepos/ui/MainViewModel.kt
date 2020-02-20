@@ -39,15 +39,13 @@ class MainViewModel(
 
         viewModelScope.coroutineContext.cancelChildren()
 
-        val newListSource = RepositoriesPageDataSource(
-            listRepository = gitHubListRepository,
-            scope = viewModelScope,
-            contextProvider = contextProvider,
-            query = newQuery
-        )
-
         val factory = object : DataSource.Factory<Int, Repository>() {
-            override fun create() = newListSource
+            override fun create() = RepositoriesPageDataSource(
+                listRepository = gitHubListRepository,
+                scope = viewModelScope,
+                contextProvider = contextProvider,
+                query = newQuery
+            )
         }
 
         LivePagedListBuilder<Int, Repository>(factory, 10).build()
