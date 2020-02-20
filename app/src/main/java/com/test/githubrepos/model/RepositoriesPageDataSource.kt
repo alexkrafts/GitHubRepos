@@ -52,7 +52,6 @@ class RepositoriesPageDataSource(
 
     private val handler = CoroutineExceptionHandler { _, e ->
         e.logError()
-        invalidate()
         listRepository.reportError(e)
     }
 }

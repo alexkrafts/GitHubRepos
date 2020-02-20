@@ -52,7 +52,6 @@ class WatchersPageDataSource(
 
     private val handler = CoroutineExceptionHandler { _, e ->
         e.logError()
-        invalidate()
         usersRepository.reportError(e)
     }
 }
