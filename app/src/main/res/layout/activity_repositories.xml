@@ -13,14 +13,14 @@
 
         <variable
             name="vm"
-            type="com.test.githubrepos.ui.MainViewModel"
+            type="com.test.githubrepos.com.test.githubrepos.ui.search.RepositoriesViewModel"
             />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.MainActivity"
+        tools:context=".com.test.githubrepos.ui.search.RepositoriesActivity"
         >
 
         <EditText

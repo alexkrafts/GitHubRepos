@@ -1,38 +1,38 @@
 package com.test.githubrepos.model
 
 import androidx.paging.PageKeyedDataSource
-import com.test.githubrepos.com.test.githubrepos.domain.ReposRepository
-import com.test.githubrepos.com.test.githubrepos.model.dto.Repository
+import com.test.githubrepos.com.test.githubrepos.domain.UsersRepository
+import com.test.githubrepos.com.test.githubrepos.model.dto.User
 import com.test.githubrepos.utils.CoroutineContextProvider
 import com.test.githubrepos.utils.logError
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-class RepositoriesPageDataSource(
-    private val listRepository: ReposRepository,
+class WatchersPageDataSource(
+    private val usersRepository: UsersRepository,
     private val scope: CoroutineScope,
     private val contextProvider: CoroutineContextProvider,
-    private val query: String
-) : PageKeyedDataSource<Int, Repository>() {
+    private val repositoryName: String
+) : PageKeyedDataSource<Int, User>() {
 
 
     override fun loadInitial(
-        params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, Repository>
+        params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, User>
     ) {
         fetchReposWithPagination(1, params.requestedLoadSize) {
             callback.onResult(it, null, 2)
         }
     }
 
-    override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, Repository>) {
+    override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, User>) {
         val page = params.key
         fetchReposWithPagination(page, params.requestedLoadSize) {
             callback.onResult(it, page + 1)
         }
     }
 
-    override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, Repository>) {
+    override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, User>) {
         val page = params.key
         fetchReposWithPagination(page, params.requestedLoadSize) {
             callback.onResult(it, page - 1)
@@ -42,10 +42,10 @@ class RepositoriesPageDataSource(
     private fun fetchReposWithPagination(
         page: Int,
         perPage: Int,
-        onLoaded: (List<Repository>) -> Unit
+        onLoaded: (List<User>) -> Unit
     ) {
         scope.launch(contextProvider.IO + handler) {
-            val list = listRepository.searchRepositoriesWithPagination(query, page, perPage)
+            val list = usersRepository.fetchWatchersWithPagination(repositoryName, page, perPage)
             onLoaded(list)
         }
     }
@@ -53,7 +53,6 @@ class RepositoriesPageDataSource(
     private val handler = CoroutineExceptionHandler { _, e ->
         e.logError()
         invalidate()
-        listRepository.reportError(e)
+        usersRepository.reportError(e)
     }
 }
-

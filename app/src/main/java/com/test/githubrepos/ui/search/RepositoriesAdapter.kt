@@ -1,4 +1,4 @@
-package com.test.githubrepos.ui
+package com.test.githubrepos.com.test.githubrepos.ui.search
 
 import android.view.LayoutInflater
 import android.view.View
@@ -10,8 +10,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.test.githubrepos.com.test.githubrepos.model.dto.Repository
 import com.test.githubrepos.databinding.ItemRepositoryBinding
 
-class RepositoriesAdapter
-    : PagedListAdapter<Repository, RepositoriesAdapter.RepositoryViewHolder>(RepositoryDiff()) {
+class RepositoriesAdapter(
+    private val onItemClick: (Repository) -> Unit
+) : PagedListAdapter<Repository, RepositoriesAdapter.RepositoryViewHolder>(
+    RepositoryDiff()
+) {
 
     class RepositoryDiff : DiffUtil.ItemCallback<Repository>() {
         override fun areItemsTheSame(oldItem: Repository, newItem: Repository): Boolean =
@@ -24,14 +27,27 @@ class RepositoriesAdapter
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepositoryViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ItemRepositoryBinding.inflate(inflater, parent, false)
-        return RepositoryViewHolder(binding.root)
+        return RepositoryViewHolder(
+            binding.root,
+            onItemClick
+        )
     }
 
     override fun onBindViewHolder(holder: RepositoryViewHolder, position: Int) {
         holder.binding?.repo = getItem(position)
     }
 
-    class RepositoryViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class RepositoryViewHolder(
+        view: View,
+        onItemClick: (Repository) -> Unit
+    ) : RecyclerView.ViewHolder(view) {
+
         val binding = DataBindingUtil.bind<ItemRepositoryBinding>(view)
+
+        init {
+            view.setOnClickListener {
+                binding?.repo?.let { onItemClick(it) }
+            }
+        }
     }
 }

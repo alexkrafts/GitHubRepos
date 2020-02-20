@@ -1,7 +1,7 @@
 package com.test.githubrepos
 
 import com.test.githubrepos.com.test.githubrepos.domain.EmptyQuery
-import com.test.githubrepos.com.test.githubrepos.domain.GitHubListRepository
+import com.test.githubrepos.com.test.githubrepos.domain.ReposRepository
 import com.test.githubrepos.com.test.githubrepos.model.dto.Repository
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
@@ -17,7 +17,7 @@ import java.net.HttpURLConnection
 @RunWith(JUnit4::class)
 class GithubRepositoriesUnitTest : TestBase() {
 
-    private val repo by inject<GitHubListRepository>()
+    private val repo by inject<ReposRepository>()
 
     @Test
     fun `checking koin modules`() {

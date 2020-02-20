@@ -8,4 +8,5 @@
     <string name="error_no_internet">No internet connection</string>
     <string name="generic_error">Something went wrong.\nPlease try again later</string>
     <string name="enterQuery">Enter repository name above</string>
+    <string name="watchers_count">Watchers: %d</string>
 </resources>

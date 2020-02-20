@@ -7,11 +7,11 @@ import com.test.githubrepos.model.GitHubApi
 import kotlinx.coroutines.delay
 import java.io.IOException
 
-class GitHubListRepository(
+class ReposRepository(
     private val api: GitHubApi
 ) {
 
-    val listState = MutableLiveData<RepositoriesListState>(EmptyQuery)
+    val listState = MutableLiveData<PagedListState>(EmptyQuery)
 
     suspend fun searchRepositoriesWithPagination(
         query: String,
@@ -40,4 +40,5 @@ class GitHubListRepository(
             )
         )
     }
+
 }

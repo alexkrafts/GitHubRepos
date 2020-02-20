@@ -1,4 +1,4 @@
-package com.test.githubrepos.ui
+package com.test.githubrepos.com.test.githubrepos.ui.search
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,7 +10,7 @@ import androidx.paging.DataSource
 import androidx.paging.LivePagedListBuilder
 import com.test.githubrepos.com.test.githubrepos.domain.EmptyQuery
 import com.test.githubrepos.com.test.githubrepos.domain.Failed
-import com.test.githubrepos.com.test.githubrepos.domain.GitHubListRepository
+import com.test.githubrepos.com.test.githubrepos.domain.ReposRepository
 import com.test.githubrepos.com.test.githubrepos.domain.Loading
 import com.test.githubrepos.com.test.githubrepos.domain.NoResults
 import com.test.githubrepos.com.test.githubrepos.model.dto.Repository
@@ -18,14 +18,14 @@ import com.test.githubrepos.model.RepositoriesPageDataSource
 import com.test.githubrepos.utils.CoroutineContextProvider
 import kotlinx.coroutines.cancelChildren
 
-class MainViewModel(
-    private val contextProvider: CoroutineContextProvider,
-    private val gitHubListRepository: GitHubListRepository
+class RepositoriesViewModel(
+        private val contextProvider: CoroutineContextProvider,
+        private val reposRepository: ReposRepository
 ) : ViewModel() {
 
     val query = MutableLiveData<String>()
 
-    private val status = gitHubListRepository.listState
+    private val status = reposRepository.listState
 
     val loading = status.map { it is Loading }
 
@@ -41,7 +41,7 @@ class MainViewModel(
 
         val factory = object : DataSource.Factory<Int, Repository>() {
             override fun create() = RepositoriesPageDataSource(
-                listRepository = gitHubListRepository,
+                listRepository = reposRepository,
                 scope = viewModelScope,
                 contextProvider = contextProvider,
                 query = newQuery

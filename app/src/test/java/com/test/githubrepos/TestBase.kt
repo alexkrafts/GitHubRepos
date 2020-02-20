@@ -1,6 +1,6 @@
 package com.test.githubrepos
 
-import com.test.githubrepos.com.test.githubrepos.domain.GitHubListRepository
+import com.test.githubrepos.com.test.githubrepos.domain.ReposRepository
 import com.test.githubrepos.model.GitHubApi
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -42,7 +42,7 @@ open class TestBase : KoinTest {
 
         factory { get<Retrofit>().create(GitHubApi::class.java) }
 
-        factory { GitHubListRepository(get()) }
+        factory { ReposRepository(get()) }
 
     }
 
